@@ -1,0 +1,159 @@
+* { box-sizing: border-box; }
+:root {
+  --bg: #ffffff; --fg: #1f2937; --card: #ffffff; --muted: #6b7280;
+  --scroll-thumb: #cbd5e1; --scroll-thumb-hover: #94a3b8; --scroll-track: transparent;
+  color-scheme: light;
+}
+:root[data-theme='dark'] {
+  --bg: #0f172a; --fg: #e2e8f0; --card: #1e293b; --muted: #94a3b8;
+  --scroll-thumb: #475569; --scroll-thumb-hover: #64748b; --scroll-track: transparent;
+  color-scheme: dark;
+}
+body { margin: 0; font-family: system-ui, sans-serif; background: var(--bg); color: var(--fg); }
+:root { --hdr: 48px; }
+.top { display: flex; align-items: center; gap: 16px; height: var(--hdr); padding: 0 20px; background: #1f2937; color: #fff; position: sticky; top: 0; z-index: 30; }
+.top .menu-btn { margin-right: -6px; font-size: 18px; line-height: 1; padding: 4px 10px; }
+.top nav { display: flex; gap: 6px; flex-wrap: wrap; flex: 1; }
+.actions { display: flex; gap: 6px; }
+.tab { background: transparent; color: #cbd5e1; border: 1px solid #475569; border-radius: 6px; padding: 4px 12px; cursor: pointer; font: inherit; }
+.muted, .error { padding: 24px; }
+.error { color: #b91c1c; }
+
+/* Layout largo do componente (container > 1536px): exemplos numa coluna escura à direita.
+   Aqui empilhamos: exemplos abaixo do bloco do evento e sem a coluna escura (sidebar continua). */
+.aui-root .container\:base .panel--right { display: none !important; }
+.aui-root .container\:base .panel-item { display: block !important; }
+.aui-root .container\:base .panel--center .panel-item--center,
+.aui-root .container\:base .panel--center .panel-item--right { width: 100% !important; }
+.aui-root .container\:base .examples { margin-top: 1rem !important; }
+
+/* Sidebar: o componente a deixa `fixed` sem `top` (desloca com o cabeçalho e deixa faixa em branco ao rolar).
+   Aqui ela vira uma coluna reservada de verdade: sticky logo abaixo do cabeçalho, com rolagem própria. */
+.aui-root .container\:base .sidebar { position: sticky !important; top: var(--hdr); align-self: flex-start; height: calc(100vh - var(--hdr)) !important; max-height: calc(100vh - var(--hdr)) !important; flex: 0 0 22rem; width: 22rem !important; }
+/* menu lateral recolhido pelo botão do cabeçalho (só no layout largo; no estreito vale o hambúrguer do componente) */
+html.sidebar-hidden .aui-root .container\:base .sidebar { display: none !important; }
+.aui-root .container\:base .sidebar > div { position: static !important; height: 100% !important; max-height: 100% !important; overflow-y: auto; overflow-x: hidden; }
+
+/* ---------- Scrollbars (página e sidebar) ---------- */
+html, .aui-root .sidebar > div { scrollbar-width: thin; scrollbar-color: var(--scroll-thumb) var(--scroll-track); }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--scroll-track); }
+::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 8px; border: 2px solid transparent; background-clip: content-box; }
+::-webkit-scrollbar-thumb:hover { background: var(--scroll-thumb-hover); background-clip: content-box; }
+.aui-root .sidebar > div::-webkit-scrollbar { width: 8px; }
+
+/* ---------- Tema escuro do componente AsyncAPI ---------- */
+[data-theme='dark'] .aui-root { color: var(--fg); }
+[data-theme='dark'] .aui-root .bg-white { background-color: #0f172a; }
+[data-theme='dark'] .aui-root .bg-gray-100 { background-color: #162033; }
+[data-theme='dark'] .aui-root .bg-gray-200 { background-color: #1e293b; }
+[data-theme='dark'] .aui-root .bg-gray-800 { background-color: #0b1220; }
+[data-theme='dark'] .aui-root .text-gray-800,
+[data-theme='dark'] .aui-root .text-gray-900 { color: #e2e8f0; }
+[data-theme='dark'] .aui-root .text-gray-700 { color: #cbd5e1; }
+[data-theme='dark'] .aui-root .text-gray-600,
+[data-theme='dark'] .aui-root .text-gray-500 { color: #94a3b8; }
+[data-theme='dark'] .aui-root .hover\:text-gray-900:hover { color: #fff; }
+[data-theme='dark'] .aui-root .border-gray-400 { border-color: #334155; }
+/* bordas neutras (as coloridas, ex.: tags laranja/azul, ficam como estão) */
+[data-theme='dark'] .aui-root [class~='border']:not([class*='border-blue']):not([class*='border-orange']):not([class*='border-purple']):not([class*='border-green']):not([class*='border-red']),
+[data-theme='dark'] .aui-root [class*='border-t'],
+[data-theme='dark'] .aui-root [class*='border-b'],
+[data-theme='dark'] .aui-root [class*='border-l'],
+[data-theme='dark'] .aui-root [class*='border-r'] { border-color: #334155; }
+[data-theme='dark'] .aui-root .shadow,
+[data-theme='dark'] .aui-root .shadow-md { --tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, .6); }
+[data-theme='dark'] .aui-root input,
+[data-theme='dark'] .aui-root select { background: #0f172a; color: #e2e8f0; }
+
+/* markdown (descrições) no tema escuro */
+[data-theme='dark'] .aui-root .prose { color: #cbd5e1; }
+[data-theme='dark'] .aui-root .prose h1,
+[data-theme='dark'] .aui-root .prose h2,
+[data-theme='dark'] .aui-root .prose h3,
+[data-theme='dark'] .aui-root .prose h4,
+[data-theme='dark'] .aui-root .prose strong,
+[data-theme='dark'] .aui-root .prose thead,
+[data-theme='dark'] .aui-root .prose blockquote,
+[data-theme='dark'] .aui-root .prose a,
+[data-theme='dark'] .aui-root .prose a code,
+[data-theme='dark'] .aui-root .prose code { color: #f1f5f9; }
+[data-theme='dark'] .aui-root .prose a { color: #7dd3fc; }
+[data-theme='dark'] .aui-root .prose :not(pre) > code { background: #0b1220; border-radius: 4px; padding: 1px 4px; }
+[data-theme='dark'] .aui-root .prose pre { background-color: #0b1220; }
+[data-theme='dark'] .aui-root .prose hr,
+[data-theme='dark'] .aui-root .prose tbody tr,
+[data-theme='dark'] .aui-root .prose thead { border-color: #334155; }
+[data-theme='dark'] .aui-root .prose ul > li:before { background-color: #475569; }
+[data-theme='dark'] .aui-root .prose ol > li:before { color: #94a3b8; }
+
+/* Chips de ID (Message ID / Operation ID / Correlation ID): mesmo estilo contornado dos demais chips
+   (APPLICATION/JSON, tags). Os valores de schema (default/const/enum) usam outra classe e não mudam. */
+.aui-root span.bg-orange-600.text-xs {
+  background: transparent;
+  color: #ed8936;
+  border: 1px solid #fbd38d;
+  border-radius: .25rem;
+  padding: .125rem .75rem;
+  font-weight: 700;
+  margin-left: .5rem;
+}
+
+/* ---------- Sidebar: busca e grupos Receber/Enviar ---------- */
+.aui-root .sidebar [hidden] { display: none !important; }
+.aui-root .ev-search { --sb-bg: #edf2f7; position: sticky; top: 0; z-index: 5; margin: 0; padding: 1rem 0; pointer-events: none;
+  /* degradê em cima e embaixo: o conteúdo que passa por trás some suavemente em vez de cortar seco */
+  background: linear-gradient(to bottom, transparent 0, var(--sb-bg) .9rem, var(--sb-bg) calc(100% - .9rem), transparent 100%); }
+.aui-root .ev-search input { pointer-events: auto; }
+[data-theme='dark'] .aui-root .ev-search { --sb-bg: #1e293b; }
+.aui-root .ev-search input { width: 100%; font: inherit; font-size: .875rem; padding: .4rem .6rem; border: 1px solid #cbd5e1; border-radius: 6px; background: #fff; color: #1f2937; outline: none; }
+.aui-root .ev-search input:focus { border-color: #4299e1; box-shadow: 0 0 0 2px rgba(66, 153, 225, .35); }
+[data-theme='dark'] .aui-root .ev-search input { background: #0f172a; color: #e2e8f0; border-color: #334155; }
+.aui-root .ev-empty { margin: .5rem 0 0; font-size: .875rem; color: var(--muted); }
+.aui-root .ev-ops { display: flex; flex-direction: column; }
+.aui-root .ev-group { margin: .25rem 0 .5rem; font-size: .7rem; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.aui-root .ev-ops > .ev-group:not(:first-child) { margin-top: .75rem; }
+.aui-root .container\:base .sidebar--content { width: auto !important; max-width: none !important; }
+
+/* ---------- Botões flutuantes (baixar .md, PDF, copiar) ---------- */
+.fab-group { position: fixed; right: 2rem; bottom: 1rem; z-index: 25; display: flex; gap: .5rem; }
+.fab { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; padding: 0; border-radius: 50%; border: 1px solid #cbd5e1; background: #fff; color: #334155; cursor: pointer; box-shadow: 0 2px 8px rgba(0, 0, 0, .18); transition: transform .12s, box-shadow .12s, background .12s; }
+.fab:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, .25); background: #f1f5f9; }
+.fab:active { transform: translateY(0); }
+.fab:focus-visible { outline: 2px solid #4299e1; outline-offset: 2px; }
+[data-theme='dark'] .fab { background: #1e293b; color: #e2e8f0; border-color: #475569; }
+[data-theme='dark'] .fab:hover { background: #334155; }
+.toast { position: fixed; left: 50%; bottom: 1.5rem; transform: translateX(-50%); z-index: 60; padding: .5rem 1rem; border-radius: 999px; background: #1f2937; color: #fff; font-size: .875rem; box-shadow: 0 2px 8px rgba(0, 0, 0, .3); }
+.toast[hidden] { display: none; }
+
+/* ---------- Impressão / PDF: documento montado a partir do Markdown (#print-doc) ---------- */
+#print-doc { display: none; }
+@page { size: A4; margin: 16mm 14mm; }
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body > *:not(#print-doc) { display: none !important; }
+  html, body { background: #fff !important; }
+  #print-doc { display: block; color: #1f2937; font: 10pt/1.5 system-ui, -apple-system, 'Segoe UI', sans-serif; }
+  #print-doc h1 { font-size: 20pt; margin: 0 0 .6em; padding-bottom: .3em; border-bottom: 2px solid #1f2937; }
+  #print-doc h2 { font-size: 15pt; margin: 1.6em 0 .5em; padding-bottom: .2em; border-bottom: 1px solid #cbd5e1; }
+  #print-doc h3 { font-size: 12pt; margin: 1.3em 0 .4em; }
+  #print-doc h4 { font-size: 10.5pt; margin: 1.1em 0 .3em; }
+  #print-doc h2, #print-doc h3, #print-doc h4 { break-after: avoid; }
+  #print-doc p, #print-doc li { orphans: 3; widows: 3; }
+  #print-doc ul, #print-doc ol { padding-left: 1.4em; margin: .4em 0; }
+  #print-doc code { font: 8.5pt ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace; background: #f1f5f9; padding: 1px 4px; border-radius: 3px; word-break: break-word; }
+  #print-doc pre { background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 4px; padding: 8px 10px; white-space: pre-wrap; break-inside: avoid; }
+  #print-doc pre code { background: none; padding: 0; }
+  #print-doc table { width: 100%; border-collapse: collapse; margin: .6em 0; font-size: 8.5pt; }
+  #print-doc thead { display: table-header-group; }
+  #print-doc tr { break-inside: avoid; }
+  #print-doc th, #print-doc td { border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; vertical-align: top; word-break: break-word; }
+  #print-doc th { background: #e2e8f0; white-space: nowrap; }
+  #print-doc a { color: inherit; text-decoration: none; }
+}
+
+/* ---------- Separador visual entre operações ----------
+   Pseudo-elemento dentro do item: a barra respeita o mesmo recuo lateral do conteúdo (não vai de ponta a ponta).
+   Mensagens, schemas e servidores já têm cards que delimitam o escopo, então ficam sem barra. */
+.aui-root li[id^='operation-'] ~ li[id^='operation-']::before { content: ''; display: block; margin: 0 2rem 2.5rem; border-top: 2px solid #cbd5e1; border-radius: 2px; }
+[data-theme='dark'] .aui-root li[id^='operation-'] ~ li[id^='operation-']::before { border-top-color: #475569; }
