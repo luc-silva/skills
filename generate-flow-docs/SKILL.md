@@ -1,5 +1,5 @@
 ---
-name: gerar-docs-fluxo
+name: generate-flow-docs
 description: Documents the macro-level process flows in legacy systems using a domain-based subfolder structure (e.g., docs/fluxos/purchase-orders/FLOW-dropshipping-purchase.md), generating Mermaid diagrams and cross-referencing related parameter files. Use when you need to map an end-to-end flow in a specific category and link its parameters.
 ---
 

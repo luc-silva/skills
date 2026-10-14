@@ -1,5 +1,5 @@
 ---
-name: gerar-docs-parametros
+name: generate-parameter-docs
 description: Reverse engineers legacy code to create standardized individual Markdown files for each configuration parameter in the docs/parametros/ directory. Use when documenting isolated parameters found in legacy codebases.
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: gerar-docs-eventos
+name: generate-event-docs
 description: Documents asynchronous events (SQS/SNS/message queues) of this repository in AsyncAPI 3.0 and generates a single self-contained HTML file to view them. Use whenever asked to document, update, or view events/queues/messages, or to generate event documentation HTML.
 ---
 
@@ -38,7 +38,7 @@ Use the repository's existing `docs/asyncapi/<repo>.asyncapi.yaml` (or create a 
 ## 3. Generate the HTML
 
 ```bash
-node .agents/skills/gerar-docs-eventos/build.mjs docs/asyncapi/<repo>.asyncapi.yaml
+node .agents/skills/generate-event-docs/build.mjs docs/asyncapi/<repo>.asyncapi.yaml
 # -> docs/asyncapi/<repo>.asyncapi.html   (use -o for a custom output path, --title for tab title)
 ```
 
@@ -50,7 +50,7 @@ node .agents/skills/gerar-docs-eventos/build.mjs docs/asyncapi/<repo>.asyncapi.y
 Verify if the committed HTML is up to date (useful in CI):
 
 ```bash
-node .agents/skills/gerar-docs-eventos/build.mjs docs/asyncapi/<repo>.asyncapi.yaml --check
+node .agents/skills/generate-event-docs/build.mjs docs/asyncapi/<repo>.asyncapi.yaml --check
 ```
 
 Exits with code 1 if the HTML is out of sync with the YAML.
